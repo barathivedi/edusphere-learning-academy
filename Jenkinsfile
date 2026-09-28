@@ -28,5 +28,13 @@ pipeline {
                 sh 'docker build -t edusphere:1.0 .'
             }
         }
+
+        stage('Docker Deploy') {
+            steps {
+                sh 'docker stop edusphere-app || true'
+                sh 'docker rm edusphere-app || true'
+                sh 'docker run -d --name edusphere-app -p 8080:8080 edusphere:1.0'
+            }
+        }
     }
 }
