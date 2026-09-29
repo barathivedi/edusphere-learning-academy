@@ -36,5 +36,12 @@ pipeline {
                 sh 'docker run -d --name edusphere-app -p 8080:8080 edusphere:${BUILD_NUMBER}'
             }
         }
+       
+         stage('Verify Deployment') {
+            steps {
+                sh 'sleep 5'
+                sh 'curl -f http://localhost:8080 > /dev/null'
+            }
+        }
     }
 }
