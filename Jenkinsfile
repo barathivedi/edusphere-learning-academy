@@ -25,7 +25,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t edusphere:1.0 .'
+                sh 'docker build -t edusphere:${BUILD_NUMBER} .'
             }
         }
 
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 sh 'docker stop edusphere-app || true'
                 sh 'docker rm edusphere-app || true'
-                sh 'docker run -d --name edusphere-app -p 8080:8080 edusphere:1.0'
+                sh 'docker run -d --name edusphere-app -p 8080:8080 edusphere:${BUILD_NUMBER}'
             }
         }
     }
